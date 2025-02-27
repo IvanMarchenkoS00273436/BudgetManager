@@ -8,4 +8,21 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\Icons\LoginIcon.ico" />
+    <None Remove="Assets\Icons\MessageBoxIcon.ico" />
+    <None Remove="Assets\Icons\RegisterIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\LoginIcon.ico" />
+    <Resource Include="Assets\Icons\MessageBoxIcon.ico" />
+    <Resource Include="Assets\Icons\RegisterIcon.ico" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BudgetManager.Controllers;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,8 +14,10 @@ namespace BudgetManager;
 
 public partial class MainWindow : Window
 {
+    public UsersController usersController = new UsersController();
     public MainWindow()
     {
         InitializeComponent();
+        UserList.ItemsSource = usersController.GetUsers();
     }
 }

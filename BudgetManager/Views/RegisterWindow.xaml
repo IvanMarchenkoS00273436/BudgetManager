@@ -1,0 +1,89 @@
+﻿<Window x:Class="BudgetManager.Views.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BudgetManager.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Register"
+        Height="500"
+        Width="400"
+        MinHeight="450"
+        MinWidth="350"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Icon="/Assets/Icons/RegisterIcon.ico">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <!-- Title -->
+            <RowDefinition Height="Auto" />
+            <!-- Email -->
+            <RowDefinition Height="Auto" />
+            <!-- Name -->
+            <RowDefinition Height="Auto" />
+            <!-- LastName -->
+            <RowDefinition Height="Auto" />
+            <!-- Password -->
+            <RowDefinition Height="Auto" />
+            <!-- Register Button -->
+            <RowDefinition Height="Auto" />
+            <!-- Login Link -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0"
+                   Text="Register"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+        <!-- Email -->
+        <TextBox x:Name="txtEmail"
+                 Grid.Row="1"
+                 Margin="0,10"
+                 materialDesign:HintAssist.Hint="Email"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+        <!-- Name -->
+        <TextBox x:Name="txtName"
+                 Grid.Row="2"
+                 Margin="0,10"
+                 materialDesign:HintAssist.Hint="Name"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+        <!-- LastName -->
+        <TextBox x:Name="txtLastName"
+                 Grid.Row="3"
+                 Margin="0,10"
+                 materialDesign:HintAssist.Hint="Last Name"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+        <!-- Password -->
+        <PasswordBox x:Name="txtPassword"
+                     Grid.Row="4"
+                     Margin="0,10"
+                     materialDesign:HintAssist.Hint="Password"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+
+        <!-- Register Button -->
+        <Button Grid.Row="5"
+                Margin="0,20"
+                Content="Sign Up"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Click="RegisterButton_Click"/>
+
+        <!-- Login Link -->
+        <TextBlock Grid.Row="6"
+                   HorizontalAlignment="Center"
+                   Margin="0,10">
+            <Hyperlink Click="LoginLink_Click"
+                        Foreground="{DynamicResource PrimaryHueMidBrush}">
+                Already have an account? Click here to login
+            </Hyperlink>
+        </TextBlock>
+    </Grid>
+</Window>

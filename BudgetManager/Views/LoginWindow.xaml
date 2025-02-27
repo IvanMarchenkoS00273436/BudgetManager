@@ -1,0 +1,74 @@
+﻿<Window x:Class="BudgetManager.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BudgetManager.Views"
+        mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="Login" 
+        Height="400" 
+        Width="380"
+        MinHeight="350" 
+        MinWidth="380"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Icon="/Assets/Icons/LoginIcon.ico">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- Title -->
+            <RowDefinition Height="Auto"/>  <!-- Email -->
+            <RowDefinition Height="Auto"/>  <!-- Password -->
+            <RowDefinition Height="Auto"/>  <!-- Login Button -->
+            <RowDefinition Height="Auto"/>  <!-- Registration Link -->
+        </Grid.RowDefinitions>
+
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0"
+                   Text="Login to you Budget manager"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+        <!-- Email -->
+        <TextBox x:Name="txtEmail"
+                 Grid.Row="1"
+                 Margin="0,10"
+                 materialDesign:HintAssist.Hint="Email"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 VerticalAlignment="Top"/>
+
+        <!-- Password -->
+        <PasswordBox x:Name="txtPassword"
+                     Grid.Row="2"
+                     Margin="0,10"
+                     materialDesign:HintAssist.Hint="Password"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                     VerticalAlignment="Top"/>
+
+        <!-- Login Button -->
+        <Button x:Name="btnLogin"
+                Grid.Row="3"
+                Margin="0,20"
+                Content="Sign In"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Click="LoginButton_Click"
+                VerticalAlignment="Top"/>
+
+        <!-- Registration Link -->
+        <TextBlock Grid.Row="4"
+                   HorizontalAlignment="Center"
+                   Margin="0,10">
+            <Hyperlink x:Name="linkRegister"
+                       Click="RegisterButton_Click"
+                       Foreground="{DynamicResource PrimaryHueMidBrush}">
+                Don't have an account? Click to register here
+            </Hyperlink>
+        </TextBlock>
+    </Grid>
+</Window>

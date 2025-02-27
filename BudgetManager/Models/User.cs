@@ -29,6 +29,6 @@ namespace BudgetManager.Models
 		public decimal Balance { get; set; }
 
 		[DataType(DataType.Password)]
-		private string Password { get; set; }
+		public string Password { get; set; }
 	}
 }
