@@ -16,24 +16,17 @@ namespace BudgetManager.Views
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            var newUser = new User
-            {
-                Email = txtEmail.Text,
-                Name = txtName.Text,
-                LastName = txtLastName.Text,
-                Password = BCrypt.Net.BCrypt.HashPassword(txtPassword.Password),
+            string email = txtEmail.Text;
+            string name = txtName.Text;
+            string lastName = txtLastName.Text;
+            string password = txtPassword.Password;
 
-            };
-            if (usersController.GetUsers().Any(u => u.Email == newUser.Email))
+            if(usersController.CreateUser(email, name, lastName, password))
             {
-                var msgWindow = new MessageWindow("Error", "User with this email already exists!");
-                msgWindow.ShowDialog();
-                return;
+                new MessageWindow("Success!", "Registration succesfull!").Show();
+                this.Close();
+                new LoginWindow().Show();
             }
-
-            usersController.GetUsers().Add(newUser);
-            MessageBox.Show("Registration successful!");
-            this.Close();
         }
 
         private void LoginLink_Click(object sender, RoutedEventArgs e)

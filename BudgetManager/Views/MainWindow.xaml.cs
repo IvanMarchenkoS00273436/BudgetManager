@@ -1,4 +1,8 @@
 ﻿using BudgetManager.Controllers;
+using BudgetManager.DatabaseSets;
+using BudgetManager.Models;
+using MaterialDesignThemes.Wpf;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,9 +19,12 @@ namespace BudgetManager;
 public partial class MainWindow : Window
 {
     public UsersController usersController = new UsersController();
-    public MainWindow()
+    public DbContextData context = new DbContextData();
+    private User User;
+
+    public MainWindow(User currentUser)
     {
+        User = currentUser;
         InitializeComponent();
-        UserList.ItemsSource = usersController.GetUsers();
     }
 }

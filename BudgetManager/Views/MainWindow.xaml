@@ -3,11 +3,150 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BudgetManager"
+        xmlns:local="clr-namespace:BudgetManager" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Style="{StaticResource MaterialDesignWindow}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Budget Manager"
+        MinHeight="550" MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/Icons/BudgetManagerIcon.ico">
     <Grid>
-        <ListBox x:Name="UserList"></ListBox>
+
+        <TabControl TabStripPlacement="Left">
+            <TabItem Margin="0 10">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Icons/OverviewIcon.ico"></Image>
+                        <TextBlock>ㅤㅤOverview</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel>
+                    <Label>1 Tab</Label>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Margin="0 10">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Icons/BudgetIcon.ico"></Image>
+                        <TextBlock>ㅤㅤBudgets</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel>
+                    <Label>2 Tab Content</Label>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Margin="0 10">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Icons/TransactionIcon.ico" Margin="15 0"></Image>
+                        <TextBlock>Transactions</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Filter" HorizontalAlignment="Center"></Label>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Label Content="Transactions" HorizontalAlignment="Center"></Label>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Margin="0 10">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Icons/ProfileIcon.ico" Margin="15 0"></Image>
+                        <TextBlock>ㅤProfileㅤㅤ</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Profile Header -->
+                        <TextBlock Grid.Row="0"
+                           Text="User Profile"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Margin="0 0 0 20"/>
+
+                        <!-- Personal Info Card -->
+                        <materialDesign:Card Grid.Row="1" Margin="0 0 0 16">
+                            <StackPanel Margin="16">
+                                <TextBlock Text="Personal Information"
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0 0 0 16"/>
+
+                                <!-- Name -->
+                                <TextBox materialDesign:HintAssist.Hint="Name"
+                                 Text="{Binding User.Name, Mode=TwoWay}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Margin="0 8"/>
+
+                                <!-- Last Name -->
+                                <TextBox materialDesign:HintAssist.Hint="Last Name"
+                                 Text="{Binding User.LastName, Mode=TwoWay}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Margin="0 8"/>
+
+                                <!-- Email -->
+                                <TextBox materialDesign:HintAssist.Hint="Email"
+                                 Text="{Binding User.Email, Mode=TwoWay}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Margin="0 8"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+
+                        <!-- Balance Card -->
+                        <materialDesign:Card Grid.Row="2" Margin="0 0 0 16">
+                            <StackPanel Margin="16">
+                                <TextBlock Text="Balance Information"
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0 0 0 16"/>
+
+                                <TextBlock Text="{Binding User.Balance, StringFormat='Current Balance: {0:C}'}"
+                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                   Margin="0 8"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+
+                        <!-- Password Card -->
+                        <materialDesign:Card Grid.Row="3">
+                            <StackPanel Margin="16">
+                                <TextBlock Text="Security"
+                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="0 0 0 16"/>
+
+                                <!--<PasswordBox materialDesign:HintAssist.Hint="Password"
+                                     Password="{Binding User.Password, Mode=TwoWay}"
+                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                     Margin="0 8"/>-->
+
+                                <Button Content="Save Changes"
+                                    Command="{Binding SaveCommand}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 16 0 0"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

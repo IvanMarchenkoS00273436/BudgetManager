@@ -11,14 +11,14 @@ namespace BudgetManager.Models
     public class BalanceSnaphot
     {
 		[Key]
-		public int BalanceSnaphotId;
+		public int BalanceSnapshotId {  get; set; }
 
 		[Required]
-		public int UserId;
-		[ForeignKey("UserId")]
+		public int UserId { get; set; }
+        [ForeignKey("UserId")]
 		public User User { get; set; }
 
-		public DateTime SnapshotDate;
-		public decimal Balance;
-	}
+		public DateTime SnapshotDate {  get; set; } 
+		public decimal Balance { get; set; }
+    }
 }

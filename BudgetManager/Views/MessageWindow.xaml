@@ -9,7 +9,7 @@
         Title="{Binding TitleMessage}"
         Height="250" 
         Width="400"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Icon="/Assets/Icons/MessageBoxIcon.ico">

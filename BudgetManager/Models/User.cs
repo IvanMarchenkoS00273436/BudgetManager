@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BudgetManager.Models
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
 		[Key]
 		public int UserId { get; set; }
@@ -28,7 +29,10 @@ namespace BudgetManager.Models
 
 		public decimal Balance { get; set; }
 
+		[Required]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
-	}
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+    }
 }

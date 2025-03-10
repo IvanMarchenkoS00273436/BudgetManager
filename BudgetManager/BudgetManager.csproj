@@ -9,20 +9,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\BudgetIcon.ico" />
+    <None Remove="Assets\Icons\BudgetManagerIcon.ico" />
     <None Remove="Assets\Icons\LoginIcon.ico" />
     <None Remove="Assets\Icons\MessageBoxIcon.ico" />
+    <None Remove="Assets\Icons\OverviewIcon.ico" />
+    <None Remove="Assets\Icons\ProfileIcon.ico" />
     <None Remove="Assets\Icons\RegisterIcon.ico" />
+    <None Remove="Assets\Icons\TransactionIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\BudgetManagerIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Icons\BudgetIcon.ico" />
     <Resource Include="Assets\Icons\LoginIcon.ico" />
     <Resource Include="Assets\Icons\MessageBoxIcon.ico" />
+    <Resource Include="Assets\Icons\OverviewIcon.ico" />
+    <Resource Include="Assets\Icons\ProfileIcon.ico" />
     <Resource Include="Assets\Icons\RegisterIcon.ico" />
+    <Resource Include="Assets\Icons\TransactionIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

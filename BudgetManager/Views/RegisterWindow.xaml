@@ -11,6 +11,8 @@
         Width="400"
         MinHeight="450"
         MinWidth="350"
+        MaxHeight="600"
+        MaxWidth="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
