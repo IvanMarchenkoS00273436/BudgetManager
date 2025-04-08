@@ -18,7 +18,7 @@ namespace BudgetManager.Models
 		public string TransactionTypeName { get; set; }
 
 		[Required]
-		[MaxLength(300, ErrorMessage = "Transaction description can not be more than 300 characters")]
+		[MaxLength(300, ErrorMessage = "Transaction photo can not be more than 300 characters")]
 		public string PathToPhoto {  get; set; }
 	}
 }

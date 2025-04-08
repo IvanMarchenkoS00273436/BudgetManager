@@ -16,12 +16,15 @@ namespace BudgetManager.Views
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            string email = txtEmail.Text;
-            string name = txtName.Text;
-            string lastName = txtLastName.Text;
-            string password = txtPassword.Password;
+            User regUser = new User() 
+            {
+                Email = txtEmail.Text,
+                Name = txtName.Text,
+                LastName = txtLastName.Text,
+                Password = txtPassword.Password
+            };
 
-            if(usersController.CreateUser(email, name, lastName, password))
+            if(usersController.CreateUser(regUser))
             {
                 new MessageWindow("Success!", "Registration succesfull!").Show();
                 this.Close();

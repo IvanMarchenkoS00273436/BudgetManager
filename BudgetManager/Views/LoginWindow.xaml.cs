@@ -1,17 +1,5 @@
 ﻿using BudgetManager.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BudgetManager.Models;
 
 namespace BudgetManager.Views
@@ -26,20 +14,21 @@ namespace BudgetManager.Views
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //string email = txtEmail.Text;
-            //string password = txtPassword.Password;
+            string email = txtEmail.Text;
+            string password = txtPassword.Password;
 
-            //User checkUser = usersController.LoginUser(email, password);
+            User checkUser = usersController.LoginUser(email, password);
 
-            //if (checkUser != null) {
-            //    var MainWindow = new MainWindow(checkUser);
-            //    this.Close();
-            //    MainWindow.Show();
-            //}
-
-            var MainWindow = new MainWindow(null);
-               this.Close();
+            if (checkUser != null)
+            {
+                var MainWindow = new MainWindow(checkUser);
+                this.Close();
                 MainWindow.Show();
+            }
+
+            //var MainWindow = new MainWindow(new User() { });
+            //this.Close();
+            //MainWindow.Show();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)

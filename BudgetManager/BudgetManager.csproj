@@ -42,8 +42,4 @@
     <Resource Include="Assets\Icons\TransactionIcon.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

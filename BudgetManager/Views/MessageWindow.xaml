@@ -10,7 +10,7 @@
         Height="250" 
         Width="400"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Icon="/Assets/Icons/MessageBoxIcon.ico">
     <Grid Margin="20">

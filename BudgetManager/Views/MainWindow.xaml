@@ -10,7 +10,8 @@
         Title="Budget Manager"
         MinHeight="550" MinWidth="800"
         WindowStartupLocation="CenterScreen"
-        Icon="/Assets/Icons/BudgetManagerIcon.ico">
+        Icon="/Assets/Icons/BudgetManagerIcon.ico"
+        Loaded="Window_Loaded">
     <Grid>
 
         <TabControl TabStripPlacement="Left">
@@ -38,6 +39,7 @@
                 </StackPanel>
             </TabItem>
 
+            <!--Transactions Tab Item-->
             <TabItem Margin="0 10">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -62,6 +64,7 @@
                 </Grid>
             </TabItem>
 
+            <!--Profile Tab Item-->
             <TabItem Margin="0 10">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -93,21 +96,21 @@
 
                                 <!-- Name -->
                                 <TextBox materialDesign:HintAssist.Hint="Name"
-                                 Text="{Binding User.Name, Mode=TwoWay}"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Margin="0 8"/>
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Margin="0 8"
+                                    x:Name="txbName"/>
 
                                 <!-- Last Name -->
                                 <TextBox materialDesign:HintAssist.Hint="Last Name"
-                                 Text="{Binding User.LastName, Mode=TwoWay}"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Margin="0 8"/>
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Margin="0 8"
+                                    x:Name="txbLastName"/>
 
                                 <!-- Email -->
                                 <TextBox materialDesign:HintAssist.Hint="Email"
-                                 Text="{Binding User.Email, Mode=TwoWay}"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Margin="0 8"/>
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Margin="0 8"
+                                    x:Name="txbEmail"/>
                             </StackPanel>
                         </materialDesign:Card>
 
@@ -118,9 +121,11 @@
                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                    Margin="0 0 0 16"/>
 
-                                <TextBlock Text="{Binding User.Balance, StringFormat='Current Balance: {0:C}'}"
-                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                   Margin="0 8"/>
+                                <TextBlock 
+                                    Text="{Binding User.Balance, StringFormat='Current Balance: {0:C}'}"
+                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                    Margin="0 8"
+                                    x:Name="txbBalance"/>
                             </StackPanel>
                         </materialDesign:Card>
 
@@ -129,18 +134,27 @@
                             <StackPanel Margin="16">
                                 <TextBlock Text="Security"
                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                   Margin="0 0 0 16"/>
+                                   Margin="0 0 0 0"/>
 
-                                <!--<PasswordBox materialDesign:HintAssist.Hint="Password"
-                                     Password="{Binding User.Password, Mode=TwoWay}"
-                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                     Margin="0 8"/>-->
+                                <PasswordBox materialDesign:HintAssist.Hint="Enter old password"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                    Margin="0 4"
+                                    x:Name="psbOldPassword"/>
 
-                                <Button Content="Save Changes"
-                                    Command="{Binding SaveCommand}"
+                                <PasswordBox materialDesign:HintAssist.Hint="Enter new password"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                    Margin="0 4"
+                                    x:Name="psbNewPassword"/>
+
+                                <Button 
+                                    Content="Save Changes"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     HorizontalAlignment="Right"
-                                    Margin="0 16 0 0"/>
+                                    Margin="0 16 0 0"
+                                    x:Name="SaveProfileBtn"
+                                    Click="SaveProfileBtn_Click">
+                                </Button>
+
                             </StackPanel>
                         </materialDesign:Card>
                     </Grid>

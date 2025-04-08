@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BudgetManager.Models
 {
-    public class User : INotifyPropertyChanged
+    public class User
     {
 		[Key]
 		public int UserId { get; set; }
@@ -32,7 +32,5 @@ namespace BudgetManager.Models
 		[Required]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
