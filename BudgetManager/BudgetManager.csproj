@@ -17,6 +17,16 @@
     <None Remove="Assets\Icons\ProfileIcon.ico" />
     <None Remove="Assets\Icons\RegisterIcon.ico" />
     <None Remove="Assets\Icons\TransactionIcon.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\clothing.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\dining.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\education.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\entertainment.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\gifts.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\groceries.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\health.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\housing.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\other.ico" />
+    <None Remove="Assets\Icons\TransactionIcons\transport.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +50,36 @@
     <Resource Include="Assets\Icons\ProfileIcon.ico" />
     <Resource Include="Assets\Icons\RegisterIcon.ico" />
     <Resource Include="Assets\Icons\TransactionIcon.ico" />
+    <Resource Include="Assets\Icons\TransactionIcons\clothing.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\dining.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\education.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\entertainment.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\gifts.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\groceries.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\health.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\housing.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\other.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\TransactionIcons\transport.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

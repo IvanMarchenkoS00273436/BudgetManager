@@ -47,21 +47,191 @@
                         <TextBlock>Transactions</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
+
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="6*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Filter" HorizontalAlignment="Center"></Label>
-                    </StackPanel>
+                    <!-- Titles for filter and transactions listbox -->
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Text="Filter" 
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Margin="0 0 0 16"/> 
 
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Label Content="Transactions" HorizontalAlignment="Center"></Label>
-                    </StackPanel>
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Text="Transactions" 
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Margin="0 0 0 16"/>
+
+                    <!-- Filter -->
+                    <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="0 0 8 0">
+                        <StackPanel Margin="10">
+                            <!-- DatePicker -->
+                            <TextBlock Text="Select Date:"
+                                Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                Margin="0 0 0 4"/>
+
+                            <DatePicker 
+                                x:Name="TransactionDatePicker"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                materialDesign:HintAssist.Hint="Date"
+                                Margin="0 0 0 16"/>
+
+                            <!-- Field Amount -->
+                            <TextBlock Text="Minimum Amount:"
+                                Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                Margin="0 0 0 4"/>
+
+                            <TextBox 
+                                x:Name="AmountTextBox"
+                                materialDesign:HintAssist.Hint="Amount"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Margin="0 0 0 16"
+                                PreviewTextInput="AmountTextBox_PreviewTextInput"/>
+
+                            <!-- Drop box for TransactionType -->
+                            <TextBlock Text="Select Category:"
+                                Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                Margin="0 0 0 4"/>
+
+                            <ComboBox 
+                                x:Name="TransactionTypeComboBox"
+                                materialDesign:HintAssist.Hint="Category">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding PathToPhoto}" 
+                                                Width="24" 
+                                                Height="24" 
+                                                Margin="0 0 8 0"/>
+                                            <TextBlock Text="{Binding TransactionTypeName}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <Button
+                                x:Name="ApplyFilterButton"
+                                Content="Apply filter"  
+                                Style="{StaticResource MaterialDesignOutlinedButton}"  
+                                HorizontalAlignment="Stretch"  
+                                Margin="5,15"  
+                                Width="auto"
+                                Click="ApplyFilterButton_Click"/>
+
+                            <!-- Clear filter button -->
+                            <Button  
+                                x:Name="ClearFilterButton"
+                                Content="Clear filter"  
+                                Style="{StaticResource MaterialDesignOutlinedButton}"  
+                                HorizontalAlignment="Stretch"  
+                                Margin="5,0"  
+                                Width="auto"
+                                Click="ClearFilterButton_Click"/>
+
+                        </StackPanel>
+                    </materialDesign:Card>
+                    
+
+                    <!-- List box for transactions -->
+                    <materialDesign:Card Grid.Row="1" Grid.Column="1" Margin="8 0 0 0">
+                        <ListBox Margin="10" x:Name="TransactionsListBox">
+                            
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Edit" x:Name="EditTransactionMenuItem" Click="EditTransactionMenuItem_Click"/>
+                                    <MenuItem Header="Delete" x:Name="DeleteTransactionMenuItem" Click="DeleteTransactionMenuItem_Click"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Image Source="{Binding TransactionType.PathToPhoto}" 
+                                               Width="32" 
+                                               Height="32" 
+                                               Grid.Column="0" 
+                                               Margin="0,0,10,0"/>
+                                        
+                                        <TextBlock Text="{Binding TransactionType.TransactionTypeName}" 
+                                                   Grid.Column="1" 
+                                                   VerticalAlignment="Center" 
+                                                   Margin="10,0,10,0"/>
+                                        
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,10,0">
+                                            <TextBlock>
+                                                <Run FontWeight="Bold">Date: </Run>
+                                                <Run Text="{Binding TransactionsDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>       
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="10,0,0,0">
+                                            <TextBlock>
+                                                <Run FontWeight="Bold">Amount: </Run>
+                                                <Run Text="{Binding TransactionAmount, StringFormat='{}{0:C}'}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </materialDesign:Card>
+                     
+                    <!-- Area for adding new transaction -->
+                    <materialDesign:Card 
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="2"
+                        Margin="0 10 0 10">
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Text="Adding a new transaction"
+                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="10" />
+
+                            <Button
+                                x:Name="CreateNewTransactionBtn"
+                                Grid.Column="1"
+                                Content="Create new transaction"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                HorizontalAlignment="Center"
+                                Margin="10"
+                                Width="400" 
+                                Click="CreateNewTransactionBtn_Click"/>
+                        </Grid>
+
+                    </materialDesign:Card>
 
                 </Grid>
+
             </TabItem>
 
             <!--Profile Tab Item-->
