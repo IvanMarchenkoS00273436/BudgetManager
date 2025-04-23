@@ -14,7 +14,9 @@
         Loaded="Window_Loaded">
     <Grid>
 
-        <TabControl TabStripPlacement="Left">
+        <TabControl TabStripPlacement="Left" >
+
+            <!--Dashboard Tab Item-->
             <TabItem Margin="0 10">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -27,6 +29,7 @@
                 </StackPanel>
             </TabItem>
 
+            <!--Budgets Tab Item-->
             <TabItem Margin="0 10">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -34,9 +37,108 @@
                         <TextBlock>ㅤㅤBudgets</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel>
-                    <Label>2 Tab Content</Label>
-                </StackPanel>
+
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock 
+                        Grid.Row="0"
+                        Text="My Budgets" 
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                        Margin="0 0 0 16"/>
+
+                    <!-- Budgets ListBox -->
+                    <materialDesign:Card Grid.Row="1" Margin="0 0 0 16">
+                        <ListBox x:Name="BudgetsListBox" 
+                             Margin="10"
+                             HorizontalContentAlignment="Stretch">
+
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Edit" x:Name="EditBudgetMenuItem" Click="EditBudgetMenuItem_Click"/>
+                                    <MenuItem Header="Delete" x:Name="DeleteBudgetMenuItem" Click="DeleteBudgetMenuItem_Click"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- Main container for each item -->
+                                    <Grid>
+                                        <!-- Using 5 evenly spaced columns -->
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <!-- Icon -->
+                                            <ColumnDefinition/>
+                                            <!-- Category name -->
+                                            <ColumnDefinition/>
+                                            <!-- Date range -->
+                                            <ColumnDefinition/>
+                                            <!-- Budget amount -->
+                                            <ColumnDefinition/>
+                                            <!-- Spent amount -->
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Category Icon -->
+                                        <Image Source="{Binding TransactionType.PathToPhoto}" 
+                                               Width="32" 
+                                               Height="32" 
+                                               Grid.Column="0" 
+                                               Margin="0,0,10,0"/>
+
+
+                                        <!-- Category Name -->
+                                        <TextBlock Text="{Binding TransactionType.TransactionTypeName}" 
+                                           Grid.Column="1" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,16,0"
+                                           FontWeight="SemiBold"/>
+
+                                        <!-- Date Range -->
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,16,0">
+                                            <TextBlock>
+                                                <Run Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                <Run Text=" - "/>
+                                                <Run Text="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                        <!-- Budget Amount -->
+                                        <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="0,0,16,0">
+                                            <TextBlock>
+                                                <Run FontWeight="Bold">Budget: </Run>
+                                                <Run Text="{Binding BudgetAmount, StringFormat='{}{0:C}'}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                        <!-- Spent Amount -->
+                                        <StackPanel Grid.Column="4" VerticalAlignment="Center">
+                                            <TextBlock>
+                                                <Run FontWeight="Bold">Spent: </Run>
+                                                <Run Text="{Binding SpentAmount, StringFormat='{}{0:C}'}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </materialDesign:Card>
+
+                    <!-- Create New Budget Button - Full width card -->
+                    <materialDesign:Card Grid.Row="2" HorizontalAlignment="Stretch">
+                        <Button
+                            x:Name="CreateNewBudgetBtn"
+                            Content="Create New Budget"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            HorizontalAlignment="Center"
+                            Margin="10"
+                            Click="CreateNewBudgetBtn_Click"/>
+                    </materialDesign:Card>
+                </Grid>
             </TabItem>
 
             <!--Transactions Tab Item-->
@@ -147,7 +249,7 @@
 
                     <!-- List box for transactions -->
                     <materialDesign:Card Grid.Row="1" Grid.Column="1" Margin="8 0 0 0">
-                        <ListBox Margin="10" x:Name="TransactionsListBox">
+                        <ListBox Margin="10" x:Name="TransactionsListBox" HorizontalContentAlignment="Stretch">
                             
                             <ListBox.ContextMenu>
                                 <ContextMenu>

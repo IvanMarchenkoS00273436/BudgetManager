@@ -11,6 +11,7 @@ namespace BudgetManager.Controllers
     public class TransactionController
     {
         private DbContextData _dbContext = new DbContextData();
+        private readonly BudgetsController _budgetsController = new BudgetsController();
 
         // Get method to retrieve all transactions
         public List<Transaction> GetTransactionsByUserId(int userId)
@@ -76,6 +77,13 @@ namespace BudgetManager.Controllers
                 var transaction = _dbContext.Transactions.Find(transactionId);
                 if (transaction != null)
                 {
+                    // Decrease the spent amount in the corresponding budget
+                    _budgetsController.UpdateBudgetSpentAmount(
+                        transaction.UserId,
+                        transaction.TransactionTypeId,
+                        -transaction.TransactionAmount);
+
+                    // Delete the transaction
                     _dbContext.Transactions.Remove(transaction);
                     _dbContext.SaveChanges();
                 }
@@ -99,6 +107,12 @@ namespace BudgetManager.Controllers
 
                 _dbContext.Transactions.Add(transaction);
                 _dbContext.SaveChanges();
+
+                _budgetsController.UpdateBudgetSpentAmount(
+                transaction.UserId,
+                transaction.TransactionTypeId,
+                transaction.TransactionAmount);
+
                 return true;
             }
             catch (Exception ex)
@@ -121,11 +135,39 @@ namespace BudgetManager.Controllers
                 if (existingTransaction == null)
                     throw new ArgumentException("Transaction not found");
 
+                // Calculate the difference in amount if transaction type is the same
+                decimal amountDifference = 0;
+                if (existingTransaction.TransactionTypeId == transaction.TransactionTypeId)
+                {
+                    amountDifference = transaction.TransactionAmount - existingTransaction.TransactionAmount;
+                }
+                else
+                {
+                    // If transaction type changed, subtract the old amount from old type's budget
+                    _budgetsController.UpdateBudgetSpentAmount(
+                        transaction.UserId,
+                        existingTransaction.TransactionTypeId,
+                        -existingTransaction.TransactionAmount);
+
+                    // And add the new amount to the new type's budget
+                    amountDifference = transaction.TransactionAmount;
+                }
+
+                // Update the transaction
                 existingTransaction.TransactionTypeId = transaction.TransactionTypeId;
                 existingTransaction.TransactionAmount = transaction.TransactionAmount;
                 existingTransaction.TransactionsDate = transaction.TransactionsDate;
-
                 _dbContext.SaveChanges();
+
+                // Update the budget for the new/modified transaction amount
+                if (amountDifference != 0)
+                {
+                    _budgetsController.UpdateBudgetSpentAmount(
+                        transaction.UserId,
+                        transaction.TransactionTypeId,
+                        amountDifference);
+                }
+
                 return true;
             }
             catch (Exception ex)

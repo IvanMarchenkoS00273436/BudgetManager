@@ -1,0 +1,89 @@
+﻿<Window x:Class="BudgetManager.Views.BudgetViews.AddBudgetView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BudgetManager.Views.BudgetViews"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Add New Budget"
+        Height="350" 
+        Width="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/Icons/BudgetIcon.ico">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Category Selection -->
+        <TextBlock Grid.Row="0"
+                   Text="Category:"
+                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                   Margin="0 0 0 8"/>
+
+        <ComboBox Grid.Row="1"
+                  x:Name="CategoryComboBox"
+                  materialDesign:HintAssist.Hint="Select category"
+                  ItemsSource="{Binding TransactionTypes}"
+                  SelectedValuePath="TransactionTypeId"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  Margin="0 0 0 16">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding PathToPhoto}" 
+                               Width="24" 
+                               Height="24"
+                               Margin="0 0 8 0"/>
+                        <TextBlock Text="{Binding TransactionTypeName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <!-- Budget Amount -->
+        <TextBlock Grid.Row="2"
+                   Text="Budget Amount:"
+                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                   Margin="0 0 0 8"/>
+
+        <TextBox Grid.Row="3"
+                 x:Name="BudgetAmountTextBox"
+                 materialDesign:HintAssist.Hint="Enter amount (e.g., 500.00)"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Margin="0 0 0 16"/>
+
+        <!-- Date Range -->
+        <TextBlock Grid.Row="4"
+                   Text="Date Range:"
+                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                   Margin="0 0 0 8"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <DatePicker x:Name="StartDatePicker"
+                        materialDesign:HintAssist.Hint="Start date"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Margin="0 0 8 0"/>
+
+            <DatePicker x:Name="EndDatePicker"
+                        materialDesign:HintAssist.Hint="End date"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Margin="0 0 8 0"/>
+        </StackPanel>
+
+        <!-- Add Button -->
+        <Button Grid.Row="6"
+                Content="Add budget"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                HorizontalAlignment="Right"
+                Click="AddButton_Click"
+                Margin="0 16 0 0"/>
+    </Grid>
+</Window>
