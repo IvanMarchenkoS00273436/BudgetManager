@@ -205,7 +205,7 @@
                                         <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="0,0,16,0">
                                             <TextBlock>
                                                 <Run FontWeight="Bold">Budget: </Run>
-                                                <Run Text="{Binding BudgetAmount, StringFormat='{}{0:C}'}"/>
+                                                <Run Text="{Binding BudgetAmount, StringFormat='{}{0:0.00 €}'}"/>
                                             </TextBlock>
                                         </StackPanel>
 
@@ -213,7 +213,7 @@
                                         <StackPanel Grid.Column="4" VerticalAlignment="Center">
                                             <TextBlock>
                                                 <Run FontWeight="Bold">Spent: </Run>
-                                                <Run Text="{Binding SpentAmount, StringFormat='{}{0:C}'}"/>
+                                                <Run Text="{Binding SpentAmount, StringFormat='{}{0:0.00 €}'}"/>
                                             </TextBlock>
                                         </StackPanel>
                                     </Grid>
@@ -383,7 +383,7 @@
                                         <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="10,0,0,0">
                                             <TextBlock>
                                                 <Run FontWeight="Bold">Amount: </Run>
-                                                <Run Text="{Binding TransactionAmount, StringFormat='{}{0:C}'}"/>
+                                                <Run Text="{Binding TransactionAmount, StringFormat='{}{0:0.00 €}'}"/>
                                             </TextBlock>
                                         </StackPanel>
                                     </Grid>
