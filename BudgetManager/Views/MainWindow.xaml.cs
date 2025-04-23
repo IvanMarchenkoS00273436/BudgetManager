@@ -4,6 +4,11 @@ using BudgetManager.Models;
 using BudgetManager.Views;
 using BudgetManager.Views.BudgetViews;
 using BudgetManager.Views.TransactionViews;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WPF;
+using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -15,6 +20,7 @@ public partial class MainWindow : Window
     public UsersController _usersController = new UsersController();
     public TransactionController _transactionController = new TransactionController();
     public BudgetsController _budgetController = new BudgetsController();
+    public ChartController _chartController;
 
     // Data collections
     private List<TransactionType> _transactionTypes;
@@ -27,6 +33,8 @@ public partial class MainWindow : Window
         User = currentUser;
         InitializeComponent();
 
+        _chartController = new ChartController(_transactionController);
+
         UpdateUserData();
         InitializeTransactionData();
         InitializeBudgetData();
@@ -34,7 +42,7 @@ public partial class MainWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-
+        InitializeCharts();
     }
 
     //Set the user's name, last name, email and balance
@@ -46,7 +54,7 @@ public partial class MainWindow : Window
         txbBalance.Text = "Current Balance: " + User.Balance.ToString();
     }
 
-    /* Initialize transactions data and budgets for the user */
+    /* Initialize transactions data and budgets, charts for the user */
     /* ======================================== */
     private void InitializeBudgetData()
     {
@@ -70,6 +78,121 @@ public partial class MainWindow : Window
 
         TransactionTypeComboBox.ItemsSource = _transactionTypes;
         TransactionsListBox.ItemsSource = _transactions;
+    }
+
+    private void InitializeDailyExpensesChart()
+    {
+        var dailyData = _chartController.GetTransactionsForLast7Days(User.UserId);
+
+        var values = dailyData.Values.ToArray();
+        var dates = dailyData.Keys.Select(d => d.ToString("dd/MM")).ToArray();
+
+        var series = new ISeries[]
+        {
+            new ColumnSeries<decimal>
+            {
+                Name = "Daily Expenses",
+                Values = values,
+                Fill = new SolidColorPaint(SKColors.DarkBlue),
+                Stroke = new SolidColorPaint(SKColors.Blue) // Removed 'StrokeThickness' as it is not a valid property
+            }
+        };
+
+        DailyExpensesChart.Series = series;
+        DailyExpensesChart.XAxes = new[]
+        {
+            new Axis
+            {
+                Labels = dates,
+                LabelsPaint = new SolidColorPaint(SKColors.Black),
+                LabelsRotation = -15
+            }
+        };
+        DailyExpensesChart.YAxes = new[]
+        {
+            new Axis
+            {
+                Name = "Amount",
+                NamePaint = new SolidColorPaint(SKColors.Black),
+                LabelsPaint = new SolidColorPaint(SKColors.Black)
+            }
+        };
+        DailyExpensesChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top;
+    }
+
+    private void InitializeMonthlyExpensesChart()
+    {
+        var monthlyData = _chartController.GetTransactionsForLast7Months(User.UserId);
+
+        var values = monthlyData.Values.ToArray();
+        var months = monthlyData.Keys.ToArray();
+
+        var series = new ISeries[]
+        {
+            new ColumnSeries<decimal>
+            {
+                Name = "Monthly Expenses",
+                Values = values,
+                Fill = new SolidColorPaint(SKColors.DarkGreen),
+                Stroke = new SolidColorPaint(SKColors.Green)
+            }
+        };
+
+        MonthlyExpensesChart.Series = series;
+        MonthlyExpensesChart.XAxes = new[]
+        {
+            new Axis
+            {
+                Labels = months,
+                LabelsPaint = new SolidColorPaint(SKColors.Black),
+                LabelsRotation = -15
+            }
+        };
+        MonthlyExpensesChart.YAxes = new[]
+        {
+            new Axis
+            {
+                Name = "Amount",
+                NamePaint = new SolidColorPaint(SKColors.Black),
+                LabelsPaint = new SolidColorPaint(SKColors.Black)
+            }
+        };
+        MonthlyExpensesChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top;
+    }
+
+    private void InitializeCategoryDistributionChart()
+    {
+        var categoryData = _chartController.GetTransactionsByCategory(User.UserId);
+        
+        // Create a list of series with custom colors to ensure each category is distinct
+        var seriesList = new List<ISeries>();
+        
+        int index = 0;
+        foreach (var category in categoryData)
+        {
+            // Create a separate series for each category to ensure proper labeling
+            seriesList.Add(new PieSeries<decimal>
+            {
+                Name = category.Key,
+                Values = new decimal[] { category.Value },
+                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Outer,
+                DataLabelsFormatter = point => $"{category.Key}: {point.Model:C}",
+                DataLabelsPaint = new SolidColorPaint(SKColors.Black)
+            });
+            index++;
+        }
+
+        // Set the series to the chart
+        CategoryDistributionChart.Series = seriesList;
+        CategoryDistributionChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right;
+    }
+
+    // Initialize the charts
+    private void InitializeCharts()
+    {
+        InitializeDailyExpensesChart();
+        InitializeMonthlyExpensesChart();
+        InitializeCategoryDistributionChart();
     }
     /* ======================================== */
 

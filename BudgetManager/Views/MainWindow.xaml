@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BudgetManager" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Style="{StaticResource MaterialDesignWindow}"
         Title="Budget Manager"
@@ -24,9 +25,102 @@
                         <TextBlock>ㅤㅤOverview</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel>
-                    <Label>1 Tab</Label>
-                </StackPanel>
+                <Grid Margin="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Text="Financial Overview" 
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                        Margin="0 0 0 16"/>
+
+                    <!-- Daily Expenses Chart -->
+                    <materialDesign:Card 
+                        Grid.Row="1" 
+                        Grid.Column="0"
+                        Margin="0 0 8 8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                Grid.Row="0"
+                                Text="Expenses - Last 7 Days" 
+                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                Margin="16 16 16 8"
+                                HorizontalAlignment="Center"/>
+
+                            <lvc:CartesianChart 
+                                x:Name="DailyExpensesChart"
+                                Grid.Row="1"
+                                Margin="8"/>
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <!-- Category Distribution Chart -->
+                    <materialDesign:Card 
+                        Grid.Row="1" 
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="8 0 0 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                Grid.Row="0"
+                                Text="Expense Category Distribution" 
+                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                Margin="16 16 16 8"
+                                HorizontalAlignment="Center"/>
+
+                            <lvc:PieChart
+                                x:Name="CategoryDistributionChart"
+                                Grid.Row="1"
+                                Margin="8"/>
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <!-- Monthly Expenses Chart -->
+                    <materialDesign:Card 
+                        Grid.Row="2" 
+                        Grid.Column="0"
+                        Margin="0 8 8 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                Grid.Row="0"
+                                Text="Expenses - Last 7 Months" 
+                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                Margin="16 16 16 8"
+                                HorizontalAlignment="Center"/>
+
+                            <lvc:CartesianChart 
+                                x:Name="MonthlyExpensesChart"
+                                Grid.Row="1"
+                                Margin="8"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
             </TabItem>
 
             <!--Budgets Tab Item-->
