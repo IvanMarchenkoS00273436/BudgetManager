@@ -42,5 +42,7 @@ namespace BudgetManager.Views
             // Show the register window
             registerWindow.Show();
         }
+
+
     }
 }
