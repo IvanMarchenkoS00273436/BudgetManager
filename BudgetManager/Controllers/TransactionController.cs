@@ -1,9 +1,4 @@
 ﻿using BudgetManager.DatabaseSets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BudgetManager.Models;
 
 namespace BudgetManager.Controllers
@@ -65,11 +60,13 @@ namespace BudgetManager.Controllers
            
         }
 
+        // Get transaction by id
         public Transaction GetTransactionById(int transactionId)
         {
             return _dbContext.Transactions.Where(t => t.TransactionId == transactionId).FirstOrDefault();
         }
 
+        // Delete transaction by id
         public void DeleteTransactionById(int transactionId)
         {
             try
@@ -94,11 +91,12 @@ namespace BudgetManager.Controllers
             }
         }
 
+        // Add transaction
         public bool AddTransaction(Transaction transaction)
         {
             try
             {
-                // Валидация
+                // Validation
                 if (transaction.TransactionAmount <= 0)
                     throw new ArgumentException("Amount must be greater than 0");
 
@@ -121,6 +119,7 @@ namespace BudgetManager.Controllers
             }
         }
 
+        // Edit transaction
         public bool EditTransaction(Transaction transaction)
         {
             try
